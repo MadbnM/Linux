@@ -1,0 +1,15 @@
+
+
+vim /etc/network/interfaces
+
+post-up iptables -t nat -A POSTROUTING -s 'ipsubnet/' -o vmbr# -j MASQUERADE
+post-down iptables -t nat -D POSTROUTING -s 'ipsubnet/' -o vmbr# -j MASQUERADE
+
+#To Initialize, edit /etc/sysctl.conf
+
+net.ipv4.ip_forward = 1
+
+#To check if any error
+sysctl -p
+
+no output means ok!
